@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>자취선배, 최종 데모데이</title>
+<title>자취선배 서비스 소개</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
@@ -44,11 +44,33 @@ h1,h2{font-weight:800;letter-spacing:-.025em;line-height:1.3}
 .phone .scr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
 .phone.right{right:10.5rem;top:50%;translate:0 -50%}
 
+/* ---------- 브라우저 창 ---------- */
+.browser{position:absolute;width:50rem;height:33.3rem;border-radius:1.1rem;background:#fff;overflow:hidden;
+  box-shadow:0 0 0 1px var(--g200),0 2.5rem 5rem -1.5rem rgba(22,26,35,.3),0 1rem 2rem -1rem rgba(22,26,35,.18)}
+.browser .bar{height:2.1rem;background:var(--g100);border-bottom:1px solid var(--g200);display:flex;align-items:center;gap:.45rem;padding:0 .9rem}
+.browser .bar i{width:.7rem;height:.7rem;border-radius:50%;background:#e5e7eb}
+.browser .bar i:nth-child(1){background:#ff6058}.browser .bar i:nth-child(2){background:#ffbd2e}.browser .bar i:nth-child(3){background:#28c940}
+.browser .bar span{margin-left:.9rem;flex:0 1 20rem;height:1.3rem;border-radius:.4rem;background:#fff;border:1px solid var(--g200);font-size:.75rem;color:var(--g500);display:flex;align-items:center;padding:0 .6rem}
+.browser .scr{position:absolute;left:0;right:0;top:2.1rem;bottom:0;background:#fff}
+.browser .scr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+/* 이미지 자리 표시: 파일이 아직 없으면 경로를 보여 준다 */
+.ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;background:repeating-linear-gradient(135deg,var(--g50) 0 1rem,#fff 1rem 2rem);
+  color:var(--g500);font-size:1rem;font-weight:600;line-height:1.6;padding:1rem}
+.ph b{display:block;font-size:1.25rem;color:var(--b600);margin-bottom:.3rem}
+.ph code{font-family:ui-monospace,Menlo,monospace;font-size:.85rem;background:var(--b50);color:var(--b600);padding:.1rem .4rem;border-radius:.3rem}
+/* 웹 + 앱 첫 화면 구성 (표지, 엔딩) */
+.duo-shot{position:absolute;right:5.5rem;top:50%;translate:0 -50%;width:50rem;height:38rem}
+.duo-shot .browser{right:0;top:0;width:46rem;height:30.6rem}
+.duo-shot .phone{left:0;bottom:0;width:14.4rem;height:30.7rem;border-radius:2.4rem;padding:.48rem}
+.duo-shot .phone .scr{border-radius:1.95rem}
+.duo-shot .phone::before{display:none}
+
 /* ---------- 1. 표지 ---------- */
 .s-cover{background:radial-gradient(60rem 36rem at 76% 48%,var(--b50),transparent 70%)}
 .brand{display:flex;align-items:center;gap:.75rem;font-size:1.25rem;font-weight:800}
 .brand img{width:2.75rem;height:2.75rem;border-radius:.8rem}
-.s-cover h1{font-size:3.5rem;margin-top:1.75rem}
+.s-cover h1{font-size:3.25rem;margin-top:1.75rem}
+.s-cover .duo-shot{right:3.5rem;scale:.84;transform-origin:right center}
 .slot{display:block;height:1.3em;overflow:hidden}
 .slot>span{display:block;animation:slot 9s cubic-bezier(.65,0,.35,1) infinite}
 .slot b{display:block;height:1.3em;white-space:nowrap;font-weight:800}
@@ -56,13 +78,14 @@ h1,h2{font-weight:800;letter-spacing:-.025em;line-height:1.3}
 .s-cover .lead{margin-top:1.5rem;font-size:1.25rem}
 .meta{margin-top:2.5rem;font-size:1rem;color:var(--g500);display:flex;gap:1.25rem;align-items:center}
 .meta i{width:1px;height:1rem;background:var(--g300)}
-.s-cover .phone{transform:translateY(2rem) scale(.95);opacity:0;transition:opacity 1s var(--arrive) .3s,transform 1.2s var(--arrive) .3s}
-.s-cover.on .phone{transform:none;opacity:1}
+.s-cover .duo-shot{opacity:0;transform:translateY(2rem) scale(.96);transition:opacity 1s var(--arrive) .3s,transform 1.2s var(--arrive) .3s}
+.s-cover.on .duo-shot{opacity:1;transform:none}
 
 /* ---------- 2. 질문 ---------- */
 .s-ask .c{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 7rem}
 .hand{width:5rem;height:5rem;border-radius:50%;background:var(--y400);display:grid;place-items:center;font-size:2.4rem}
 .s-ask h2{font-size:4.5rem;margin-top:2rem;line-height:1.25}
+.v .s-ask .talk,.s-ask .say{display:none}.v .s-ask .say{display:block}
 .s-ask .sub{margin-top:2.5rem;font-size:2rem;font-weight:600;color:var(--g600)}
 
 /* ---------- 3~6. Before ---------- */
@@ -131,10 +154,23 @@ h1,h2{font-weight:800;letter-spacing:-.025em;line-height:1.3}
 .ticks{display:flex;gap:.5rem;margin-top:3rem}
 .ticks i{width:2.4rem;height:.22rem;border-radius:.2rem;background:var(--g200);transition:background .4s}
 .ticks i.a{background:var(--b500)}
-.s-demo .phone::before,.s-cover .phone::before{display:none}
-.s-demo .scr img{opacity:0;transition:opacity .5s ease}
-.s-demo .scr img.a{opacity:1}
-.s-demo .phone{width:20.3rem;height:43.4rem}
+.s-demo .phone::before{display:none}
+.s-demo .scr>*{opacity:0;transition:opacity .5s ease}
+.s-demo .scr>.a{opacity:1}
+.s-demo .phone{width:20.3rem;height:43.4rem;transition:opacity .6s var(--arrive),transform .8s var(--arrive)}
+.s-demo .browser{width:46rem;height:30.65rem;right:4rem;top:50%;translate:0 -50%;transition:opacity .6s var(--arrive),transform .8s var(--arrive)}
+.s-demo.web .phone{opacity:0;transform:translateY(3rem) scale(.92)}
+.s-demo.app .browser{opacity:0;transform:translateY(-1.5rem) scale(.94)}
+.s-demo .copy{width:33rem}.s-demo .copy h2{font-size:2.625rem}
+.badge{display:inline-flex;gap:.5rem;align-items:center;margin-top:1.6rem;background:var(--b50);color:var(--b600);border-radius:2rem;padding:.55rem 1rem;font-size:1rem;font-weight:700;transition:opacity .4s}
+.badge small{color:var(--g500);font-weight:500;font-size:.875rem}
+.badge.off{opacity:0}
+.callouts{display:none!important;position:absolute;right:31.5rem;top:50%;translate:0 -50%;display:flex;flex-direction:column;gap:1.1rem;pointer-events:none}
+.callouts span{background:#fff;border:1px solid var(--g200);border-radius:1.25rem;padding:.85rem 1.25rem;font-size:1.25rem;font-weight:700;color:var(--g800);
+  box-shadow:0 1rem 2.25rem -1.25rem rgba(22,26,35,.35);opacity:0;transform:translateX(1rem);transition:opacity .6s var(--arrive),transform .6s var(--arrive)}
+.callouts span:nth-child(2){margin-left:2.5rem}
+.s-demo.memo .callouts span{opacity:1;transform:none;transition-delay:.5s}
+.s-demo.memo .callouts span:nth-child(2){transition-delay:.8s}
 
 /* ---------- 10. Before / After ---------- */
 .s-ba .c{position:absolute;inset:0;padding:0 7rem;display:flex;flex-direction:column;justify-content:center}
@@ -153,13 +189,16 @@ h1,h2{font-weight:800;letter-spacing:-.025em;line-height:1.3}
 
 /* ---------- 11. 엔딩 ---------- */
 .s-end{background:var(--sky);color:var(--navy)}
-.s-end .txt{width:42rem}
-.s-end h2{font-size:3.1rem;line-height:1.35;margin-top:2rem}
-.s-end .lead{color:var(--navy);opacity:.85;font-size:1.5rem}
-.booth{position:absolute;right:7.5rem;top:50%;translate:0 -50%;width:36rem;height:30rem}
-.booth .main{position:absolute;right:0;top:0;width:34rem;height:25.5rem;border-radius:1.5rem;overflow:hidden;box-shadow:0 2rem 4rem -1.5rem rgba(20,40,90,.45)}
-.booth .gift{position:absolute;right:-2rem;bottom:-1.75rem;width:13rem;height:17.3rem;border-radius:1.25rem;overflow:hidden;border:.45rem solid #fff;rotate:5deg;box-shadow:0 1.5rem 3rem -1rem rgba(20,40,90,.45)}
-.booth img{width:100%;height:100%;object-fit:cover}
+.s-end .txt{width:40rem}
+.s-end .motto{margin-top:1.75rem;font-size:1.25rem;font-weight:700;color:var(--b600)}
+.s-end h2{font-size:3.25rem;line-height:1.3;margin-top:.9rem}
+.s-end .lead{color:var(--navy);opacity:.8;font-size:1.375rem;margin-top:1.1rem}
+.s-end .go{display:flex;align-items:center;gap:1.4rem;margin-top:2.25rem}
+.s-end .qr{width:9.5rem;height:9.5rem;border-radius:1rem;background:#fff;padding:.5rem;box-shadow:0 1.25rem 2.5rem -1.25rem rgba(20,40,90,.45)}
+.s-end .go b{display:block;font-size:2rem;font-weight:800;letter-spacing:-.01em}
+.s-end .go .k{display:inline-block;margin-bottom:.5rem;font-size:.9375rem;font-weight:700;color:var(--b600);background:#fff;border-radius:2rem;padding:.3rem .8rem}
+.s-end .browser{box-shadow:0 2.5rem 5rem -1.5rem rgba(20,40,90,.35)}
+.s-end .duo-shot{right:3rem;scale:.72;transform-origin:right center}
 .pill{display:inline-block;margin-top:2.25rem;background:var(--y400);color:var(--g900);border-radius:2rem;padding:.8rem 1.5rem;font-size:1.25rem;font-weight:800}
 
 /* ---------- HUD / 대본 ---------- */
@@ -168,10 +207,15 @@ h1,h2{font-weight:800;letter-spacing:-.025em;line-height:1.3}
 .hud .no{position:absolute;right:1.5rem;bottom:1rem;font-size:.875rem;color:var(--g400);font-variant-numeric:tabular-nums}
 .hud .tm{position:absolute;left:1.5rem;bottom:1rem;font-size:1rem;font-weight:700;color:var(--g400);font-variant-numeric:tabular-nums;opacity:0}
 .hud .tm.show{opacity:1}.hud .tm.over{color:var(--r500)}
+.v .hud,.v .hint,.v .notes,.v .toast{display:none!important}
+.v body{cursor:none}
 .hint{position:fixed;left:50%;bottom:1.1rem;translate:-50% 0;font-size:.875rem;color:var(--g400);z-index:51;transition:opacity .5s}
 .notes{position:fixed;left:50%;bottom:3rem;translate:-50% 0;z-index:60;width:min(62rem,92vw);background:rgba(22,26,35,.92);color:#fff;border-radius:1rem;padding:1.1rem 1.5rem;
   font-size:1.25rem;line-height:1.6;font-weight:500;white-space:pre-line;display:none}
 .notes.show{display:block}
+.toast{position:fixed;left:50%;top:1.5rem;translate:-50% 0;z-index:70;background:rgba(22,26,35,.9);color:#fff;border-radius:2rem;padding:.6rem 1.2rem;font-size:1rem;font-weight:700;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+.s-demo .pane{position:absolute;inset:0}
 .notes small{display:block;font-size:.8125rem;color:#9fb0cf;font-weight:700;margin-bottom:.3rem}
 </style>
 </head>
@@ -181,18 +225,22 @@ h1,h2{font-weight:800;letter-spacing:-.025em;line-height:1.3}
 <section class="slide s-cover"><div class="frame">
   <div class="txt">
     <div class="brand" data-at="0"><img src="img/logo.png" alt="">자취선배</div>
-    <h1 data-at="0" style="--i:1"><span class="slot"><span><b class="grad">살 동네를 찾을 때,</b><b class="grad">본 방을 기록할 때,</b><b class="grad">여러 방을 비교할 때,</b><b class="grad">살 동네를 찾을 때,</b></span></span>어디서부터<br>시작해야 할까요?</h1>
-    <p class="lead" data-at="0" style="--i:2">자취할 동네를 찾고, 직접 본 방들을<br>편하게 기록하고 비교하는 서비스, 자취선배</p>
-    <div class="meta" data-at="0" style="--i:3">우아한테크코스 8기<i></i>최종 데모데이</div>
+    <h1 data-at="0" style="--i:1"><span class="slot"><span><b class="grad">처음 구하는 자취방,</b><b class="grad">첫 직장 근처 원룸,</b><b class="grad">졸업 후 첫 독립,</b><b class="grad">처음 구하는 자취방,</b></span></span>동네 찾기부터<br>방 비교까지 한 번에</h1>
+    <p class="lead" data-at="0" style="--i:2">회사·학교까지 통근 시간으로 동네를 고르고,<br>직접 본 방은 체크리스트·사진·메모로 남겨<br>나란히 비교하세요.</p>
+    <div class="meta" data-at="0" style="--i:3">자취선배<i></i>jachwi-sunbae.kr</div>
   </div>
-  <div class="phone right"><div class="scr"><img src="img/home.jpg" alt="자취선배 홈 화면"></div></div>
+  <div class="duo-shot">
+    <div class="browser"><div class="bar"><i></i><i></i><i></i><span>jachwi-sunbae.kr</span></div><div class="scr" data-slot="web/home"></div></div>
+    <div class="phone"><div class="scr" data-slot="app/home"></div></div>
+  </div>
 </div></section>
 
 <!-- 2. 질문 -->
 <section class="slide s-ask"><div class="frame"><div class="c">
-  <div class="hand" data-at="0">✋</div>
+  <div class="talk"><div class="hand" data-at="0">✋</div>
   <h2 data-at="0" style="--i:1">낯선 동네에서<br>방을 구해 보신 적 있으신가요?</h2>
-  <p class="sub" data-at="1">그때, 어디서부터 알아봐야 할지 막막하지 않으셨나요?</p>
+  <p class="sub" data-at="1">그때, 어디서부터 알아봐야 할지 막막하지 않으셨나요?</p></div>
+  <div class="say"><h2 data-at="0">처음 가는 동네에서 방을 구할 때,<br>어디서부터 봐야 할지 막막하죠.</h2></div>
 </div></div></section>
 
 <!-- 3. Before: 동네 -->
@@ -252,9 +300,9 @@ h1,h2{font-weight:800;letter-spacing:-.025em;line-height:1.3}
   <div class="line">
     <div class="node" data-at="0" style="--i:1"><div class="n">01</div><b>동네 찾기</b><span>자주 가는 목적지를 기준으로<br>살 동네를 찾아요</span></div>
     <div class="arr" data-at="0" style="--i:2">›</div>
-    <div class="node" data-at="0" style="--i:3"><div class="n">02</div><b>거리 확인</b><span>주변 시설과 거리 메모로<br>동네 환경을 살펴봐요</span></div>
+    <div class="node" data-at="0" style="--i:3"><div class="n">02</div><b>관심 지역</b><span>마음에 드는 동네를<br>저장해 두고 참고해요</span></div>
     <div class="arr" data-at="0" style="--i:4">›</div>
-    <div class="node" data-at="0" style="--i:5"><div class="n">03</div><b>방 기록</b><span>체크리스트, 사진, 메모를<br>방마다 남겨요</span></div>
+    <div class="node" data-at="0" style="--i:5"><div class="n">03</div><b>방 기록</b><span>방 등록, 주변 확인, 메모,<br>체크리스트까지 한곳에</span></div>
     <div class="arr" data-at="0" style="--i:6">›</div>
     <div class="node" data-at="0" style="--i:7"><div class="n">04</div><b>방 비교</b><span>기록한 방들을<br>한눈에 비교해요</span></div>
   </div>
@@ -267,9 +315,12 @@ h1,h2{font-weight:800;letter-spacing:-.025em;line-height:1.3}
     <div class="no sw" id="dno"></div>
     <h2 class="sw" id="dtitle"></h2>
     <p class="sw" id="ddesc"></p>
+    <div class="badge off" id="dbadge"></div>
     <div class="ticks" id="ticks"></div>
   </div>
-  <div class="phone right"><div class="scr" id="dscr"></div></div>
+  <div class="browser" id="dweb"><div class="bar"><i></i><i></i><i></i><span>jachwi-sunbae.kr</span></div><div class="scr" id="dwebscr"></div></div>
+  <div class="callouts"><span>밤길이 조금 어두워요</span><span>정류장까지 3분</span></div>
+  <div class="phone right" id="dapp"><div class="scr" id="dappscr"></div></div>
 </div></section>
 
 <!-- 10. Before / After -->
@@ -277,8 +328,8 @@ h1,h2{font-weight:800;letter-spacing:-.025em;line-height:1.3}
   <div class="eyebrow" data-at="0">탐색부터 기록, 비교까지 하나로</div>
   <h2 data-at="0" style="--i:1">어디서부터 알아봐야 할지 막막했던 집 구하기</h2>
   <div class="ba">
-    <div class="col b" data-at="0" style="--i:2"><small>BEFORE</small><ul><li>막막한 동네 탐색</li><li>흩어진 기록</li><li>기억에 의존한 비교</li></ul></div>
-    <div class="col a" data-at="0" style="--i:4"><small>AFTER</small><ul><li>목적지 중심 동네 탐색</li><li>체계적인 기록</li><li>기록을 바탕으로 비교</li></ul></div>
+    <div class="col b" data-at="0" style="--i:2"><small>BEFORE</small><ul><li>동네마다 길찾기를 반복</li><li>갤러리·메모장에 흩어진 기록</li><li>“그 집 어땠더라?”</li></ul></div>
+    <div class="col a" data-at="0" style="--i:4"><small>AFTER</small><ul><li>목적지 하나로 동네를 한 번에</li><li>방마다 사진·체크·메모가 한곳에</li><li>기록을 나란히 놓고 비교</li></ul></div>
   </div>
   <div class="words"><b data-at="1" class="grad">시간</b><i data-at="1" style="--i:1">·</i><b data-at="1" style="--i:2" class="grad">기준</b><i data-at="1" style="--i:3">·</i><b data-at="1" style="--i:4" class="grad">확신</b></div>
 </div></div></section>
@@ -287,30 +338,51 @@ h1,h2{font-weight:800;letter-spacing:-.025em;line-height:1.3}
 <section class="slide s-end"><div class="frame">
   <div class="txt">
     <div class="brand" data-at="0"><img src="img/logo.png" alt="">자취선배</div>
-    <h2 data-at="0" style="--i:1">본 방의 기록이,<br>내 방을 고르는 기준이 되도록.</h2>
-    <p class="lead" data-at="0" style="--i:2">자취선배가 함께하겠습니다.</p>
-    <span class="pill" data-at="0" style="--i:3">직접 써 보고 싶다면, 저희 부스로 놀러 오세요</span>
+    <p class="motto" data-at="0" style="--i:1">본 방의 기록이, 내 방을 고르는 기준이 되도록.</p>
+    <h2 data-at="0" style="--i:2">첫 동네 찾기,<br>목적지 하나면 충분해요</h2>
+    <p class="lead" data-at="0" style="--i:3">회사나 학교 하나만 입력해 보세요.</p>
+    <div class="go" data-at="0" style="--i:4">
+      <img class="qr" src="img/qr.png" alt="자취선배 바로가기 QR 코드">
+      <div><span class="k">웹페이지</span><b>jachwi-sunbae.kr</b></div>
+    </div>
   </div>
-  <div class="booth"><div class="main" data-at="0" style="--i:4"><img src="img/booth2.jpg" alt="자취선배 부스 위치"></div><div class="gift" data-at="0" style="--i:6"><img src="img/booth1.jpg" alt="부스 선물 복덕이 인형"></div></div>
+  <div class="duo-shot" data-at="0" style="--i:5">
+    <div class="browser"><div class="bar"><i></i><i></i><i></i><span>jachwi-sunbae.kr</span></div><div class="scr" data-slot="web/home"></div></div>
+    <div class="phone"><div class="scr" data-slot="app/home"></div></div>
+  </div>
 </div></section>
 
 <div class="hud"><div class="tm" id="tm">0:00</div><div class="no" id="no"></div><div class="pg" id="pg"></div></div>
-<div class="hint" id="hint">→ · 스페이스 · 클릭으로 넘기기　|　N 대본　|　F 전체 화면</div>
+<div class="hint" id="hint">→ · 스페이스 · 클릭으로 넘기기　|　N 대본　|　M 웹·앱 전환　|　F 전체 화면</div>
 <div class="notes" id="notes"></div>
+<div class="toast" id="toast"></div>
 
 <script>
 /* ============ 고쳐 쓰는 값 ============ */
 
-// 시연 단계: [분류, 화면 파일, 제목, 설명]
+// 시연 화면을 어디서 보여 줄지: 'mix'(동네 찾기·관심 지역은 웹, 방 등록부터 앱) / 'web'(전부 웹) / 'app'(전부 앱)
+// 발표 중 M 키로도 바꿀 수 있다.
+let MODE = 'mix';
+
+// 영상용 페이지는 VIDEO = true: 자동 재생·반복, 진행 표시와 대본 숨김, 손들기 장면은 문장으로.
+const VIDEO = false;
+// 영상용 단계별 재생 시간(초). 순서는 키를 누르는 순서와 같다.
+const VIDEO_DUR = { cover: 5, ask: 4, before: [4.4, 3.8, 4.2, 3.4], pivot: [3.4, 3.8], flow: 4.4, demo: 3.4, ba: [3.6, 3.4], end: 10 };
+
+// 화면 파일은 img/web/<이름>.jpg (1440x900 권장), img/app/<이름>.jpg (780x1688 권장)에 넣는다.
+// 시연 단계: [분류, 화면 이름, 제목, 설명, mix 모드에서 쓸 플랫폼]
 const DEMO = [
-  ['동네 찾기', 'search.jpg',    '자주 가는 장소를\n목적지로 정해요',        '회사나 학교를 검색하거나\n지도에서 바로 골라요.'],
-  ['동네 찾기', 'explore.jpg',   '살펴볼 동네가\n한 번에 보여요',            '통근 시간별로 칠해진 지도에서\n가까운 동네부터 살펴봐요.'],
-  ['동네 찾기', 'area.jpg',      '교통과 편의시설도\n지도에서 함께',        '병원, 교통, 편의시설을\n지도 위에서 바로 확인해요.'],
-  ['거리 메모', 'memo_map.jpg',  '지도만으로는 모르는\n동네의 실제 모습',    '다른 사람들이 직접 남긴\n거리 메모를 살펴봐요.'],
-  ['방 기록',   'checklist.jpg', '놓치기 쉬운 부분은\n체크리스트로',        '괜찮음, 주의를 고르면\n안 본 항목은 미확인으로 남아요.'],
-  ['방 비교',   'list.jpg',      '기록한 방들을\n한눈에 살펴봐요',          '가격, 주소, 체크 결과를\n목록에서 바로 확인해요.'],
-  ['방 비교',   'compare.jpg',   '기록한 방들을\n한눈에 비교해요',          '기억에 의존하는 대신,\n직접 확인한 정보로 선택해요.'],
+  ['동네 찾기', 'explore-search', '자주 가는 장소를\n목적지로 정해요',          '회사나 학교를 검색하거나\n지도에서 바로 골라요.',               'web'],
+  ['동네 찾기', 'explore-map',    '동네 이름을 몰라도\n통근 시간으로 골라요',      '통근 시간별로 칠해진 지도에서\n가까운 동네부터 살펴봐요.',       'web'],
+  ['관심 지역', 'interest',       '고민되는 동네는 저장하고\n방 구할 때 다시 꺼내 봐요', '관심 지역은 로그인하면\n웹과 앱 어디서든 이어져요.',          'web'],
+  ['방 기록',   'room-add',       '지도에 방을 찍어 두면\n기록이 한곳에 모여요',               '가격과 위치를 남기면\n방마다 기록이 시작돼요.',                  'app'],
+  ['방 기록',   'room-nearby',    '방 주변의 교통과\n편의시설도 함께',            '등록한 방을 중심으로\n주변 환경을 확인해요.',                    'app'],
+  ['방 기록',   'memo',           '가는 길에 느낀 점은\n지도에 메모로',           '골목이 밤에 어둡다거나,\n음식점이 많다거나.',                    'app'],
+  ['방 기록',   'checklist',      '놓치기 쉬운 부분은\n체크리스트로',             '괜찮음, 주의를 고르면\n안 본 항목은 미확인으로 남아요.',          'app'],
+  ['방 비교',   'list',           '기록한 방들을\n한눈에 살펴봐요',               '가격, 주소, 체크 결과를\n목록에서 바로 확인해요.',               'app'],
+  ['방 비교',   'compare',        '“그 집 어땠더라?” 대신\n기록을 나란히 놓고 골라요',               '기억에 의존하는 대신,\n직접 확인한 정보로 선택해요.',             'app'],
 ];
+const MEMO_STEP = 5;   // 메모 예시 말풍선을 띄울 단계(0부터)
 
 // 발표 대본. 키 한 번에 한 칸씩 넘어간다. (N 키로 화면에 표시)
 const NOTES = [
@@ -323,30 +395,48 @@ const NOTES = [
   '결국 앞으로 살아갈 집을 기억에 의존해서 선택하게 됩니다.',
   '그래서 저희는 생각했습니다.\n"방을 구하는 이 모든 과정을 한곳에서 이어갈 수 없을까?"',
   '자취선배는 이 질문에서 출발했습니다.',
-  '자취선배에서는 동네를 찾고, 주변의 기록을 확인하고, 직접 본 방을 기록하고 비교할 수 있습니다.',
-  '[동네찾기] 먼저 직장이나 학교처럼 자주 가는 장소를 목적지로 설정합니다.',
-  '목적지를 기준으로 살펴볼 동네를 찾고,',
-  '지도에서 교통과 편의시설도 함께 확인할 수 있습니다.',
-  '[거리 메모] 그런데 지도에 표시된 정보만으로는 실제 동네의 모습을 알기 어렵죠.\n이때 거리 메모를 통해 다른 사람들이 직접 남긴 주변 기록을 살펴볼 수 있습니다.',
-  '[방 기록] 이제 마음에 드는 방을 직접 보러 갑니다.\n체크리스트를 따라 놓치기 쉬운 부분을 확인하고, 사진과 메모를 남깁니다.',
-  '[방 비교] 여러 방을 둘러본 뒤에는 기록한 내용들을 한눈에 비교할 수 있습니다.',
-  '이제 기억에 의존하는 대신, 직접 확인한 정보를 바탕으로 선택할 수 있는 거죠.',
+  '자취선배에서는 살 동네를 찾아 관심 지역으로 저장하고, 직접 본 방을 기록하고 비교할 수 있습니다.',
+  '[동네 찾기] 먼저 직장이나 학교처럼 자주 가는 장소를 목적지로 설정합니다.',
+  '목적지를 기준으로 통근하기 좋은 동네를 한눈에 찾을 수 있습니다.',
+  '[관심 지역] 마음에 드는 동네는 관심 지역으로 저장해 둡니다. 저장한 관심 지역은 방을 구할 때 계속 참고할 수 있습니다.',
+  '[방 등록] 이제 보러 갈 방을 지도에 등록합니다.',
+  '등록한 방 주변의 교통과 편의시설도 함께 확인할 수 있습니다.',
+  '[메모] 방을 보러 가는 길에 느낀 점도 지도에 메모로 남길 수 있습니다. 골목이 밤에 어둡다거나, 음식점이 많다거나 하는 것들이요.',
+  '[체크리스트] 방에 도착하면 체크리스트를 따라 놓치기 쉬운 부분을 확인하고, 사진과 메모를 남깁니다.',
+  '[목록] 여러 방을 둘러본 뒤에는 기록한 방들을 한눈에 살펴볼 수 있고,',
+  '[비교] 나란히 놓고 비교할 수도 있습니다. 이제 기억에 의존하는 대신, 직접 확인한 정보를 바탕으로 선택할 수 있는 거죠.',
   '어디서부터 알아봐야 할지 막막했던 집 구하기.\n자취선배는 탐색부터 기록, 비교까지 하나로 연결합니다.',
   '탐색하는 시간은 줄이고, 비교할 기준을 만들고, 선택에 확신을 더해줍니다.',
-  '"본 방의 기록이, 내 방을 고르는 기준이 되도록."\n자취선배가 함께하겠습니다.\n직접 경험해 보고 싶으시다면 화면에 보이는 저희 부스로 놀러 와 주세요.\n감사합니다.',
+  '"본 방의 기록이, 내 방을 고르는 기준이 되도록."\n자취선배가 함께하겠습니다.\n감사합니다.\n(화면의 QR로 바로 써 볼 수 있어요)',
 ];
 
 /* ============ 동작 ============ */
 const $ = (s) => document.querySelector(s);
 const slides = [...document.querySelectorAll('.slide')];
-const STEPS = [1, 2, 1, 1, 1, 1, 2, 1, DEMO.length, 2, 1];   // 슬라이드마다 키를 몇 번 누르는지
+if (VIDEO) document.documentElement.classList.add('v');
+const STEPS = [1, VIDEO ? 1 : 2, 1, 1, 1, 1, 2, 1, DEMO.length, 2, 1];   // 슬라이드마다 키를 몇 번 누르는지
 const states = []; STEPS.forEach((n, s) => { for (let k = 0; k < n; k++) states.push([s, k]); });
 const DEMO_SLIDE = 8, PIVOT_SLIDE = 6;
 let cur = 0, t0 = 0, lastDemo = -1;
 
-// 시연 화면과 진행 표시 준비
-$('#dscr').innerHTML = DEMO.map((d) => `<img src="img/${d[1]}" alt="자취선배 ${d[0]} 화면" style="${d[4] || ''}">`).join('');
+// 이미지 자리: 파일이 있으면 이미지를, 없으면 넣을 경로를 보여 준다.
+function fillSlot(el, path, label) {
+  const im = new Image();
+  im.alt = '자취선배 ' + label + ' 화면';
+  im.onerror = () => {
+    el.innerHTML = `<div class="ph"><div><b>${path.startsWith('web') ? '웹' : '앱'} 화면 넣기</b>${label}<br><code>img/${path}.jpg</code></div></div>`;
+  };
+  im.src = 'img/' + path + '.jpg';
+  el.appendChild(im);
+}
+document.querySelectorAll('[data-slot]').forEach((el) => fillSlot(el, el.dataset.slot, '첫 화면'));
+
+// 시연 화면과 진행 표시 준비 (웹 창과 휴대폰 양쪽에 단계별 화면을 모두 넣어 두고, 단계마다 하나만 보인다)
+for (const [box, pf] of [[$('#dwebscr'), 'web'], [$('#dappscr'), 'app']]) {
+  DEMO.forEach((d) => { const pane = document.createElement('div'); pane.className = 'pane'; box.appendChild(pane); fillSlot(pane, pf + '/' + d[1], d[0]); });
+}
 $('#ticks').innerHTML = DEMO.map(() => '<i></i>').join('');
+const platformOf = (k) => (MODE === 'mix' ? DEMO[k][4] : MODE);
 
 function setDemo(k) {
   if (k === lastDemo) return;
@@ -356,10 +446,15 @@ function setDemo(k) {
     $('#crumb').textContent = DEMO[k][0];
     $('#dno').textContent = String(k + 1).padStart(2, '0') + ' / ' + String(DEMO.length).padStart(2, '0');
     $('#dtitle').textContent = DEMO[k][2]; $('#ddesc').textContent = DEMO[k][3];
+    const bd = $('#dbadge'); bd.innerHTML = DEMO[k][5] || ''; bd.classList.toggle('off', !DEMO[k][5]);
     sw.forEach((e) => e.classList.remove('out'));
   };
   if (first) apply(); else { sw.forEach((e) => e.classList.add('out')); setTimeout(apply, 260); }
-  [...$('#dscr').children].forEach((im, i) => im.classList.toggle('a', i === k));
+  const pf = platformOf(k), demo = slides[DEMO_SLIDE];
+  demo.classList.toggle('web', pf === 'web'); demo.classList.toggle('app', pf === 'app');
+  demo.classList.toggle('memo', k === MEMO_STEP);
+  [...$('#dwebscr').children].forEach((im, i) => im.classList.toggle('a', i === k));
+  [...$('#dappscr').children].forEach((im, i) => im.classList.toggle('a', i === k));
   [...$('#ticks').children].forEach((t, i) => t.classList.toggle('a', i <= k));
 }
 
@@ -394,9 +489,38 @@ addEventListener('keydown', (e) => {
   else if (e.key === 'Home') { e.preventDefault(); t0 = 0; $('#tm').classList.remove('show', 'over'); $('#tm').textContent = '0:00'; go(0); }
   else if (e.key === 'End') { e.preventDefault(); go(states.length - 1); }
   else if (e.key === 'n' || e.key === 'N' || e.key === 'ㅜ') $('#notes').classList.toggle('show');
+  else if (e.key === 'm' || e.key === 'M' || e.key === 'ㅡ') { MODE = { mix: 'web', web: 'app', app: 'mix' }[MODE]; lastDemo = -1; render(); toast({ mix: '웹 → 앱', web: '전부 웹', app: '전부 앱' }[MODE]); }
   else if (e.key === 'f' || e.key === 'F' || e.key === 'ㄹ') { try { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {}); } catch (_) {} }
 });
-addEventListener('click', (e) => { go(cur + (e.clientX < innerWidth * 0.25 ? -1 : 1)); });
+addEventListener('click', (e) => { if (VIDEO) { togglePlay(); return; } go(cur + (e.clientX < innerWidth * 0.25 ? -1 : 1)); });
+
+// ---------- 영상 모드: 자동 재생과 반복 ----------
+function durOf(i) {
+  const [s, k] = states[i], D = VIDEO_DUR;
+  return 1000 * (s === 0 ? D.cover : s === 1 ? D.ask : s >= 2 && s <= 5 ? D.before[s - 2] : s === PIVOT_SLIDE ? D.pivot[k] :
+    s === 7 ? D.flow : s === DEMO_SLIDE ? D.demo : s === 9 ? D.ba[k] : D.end);
+}
+let playing = VIDEO, timer = 0;
+function schedule() {
+  clearTimeout(timer); if (!playing) return;
+  timer = setTimeout(() => {
+    if (cur === states.length - 1) { restart(); } else { go(cur + 1); }
+    schedule();
+  }, durOf(cur));
+}
+function restart() {
+  // 처음으로 돌아갈 때 전환 장면의 줌과 표지 문구 회전을 처음 상태로 되돌린다
+  const im = document.querySelector('.bed img'); im.style.transition = 'none';
+  cur = 0; lastDemo = -1; render(); void im.offsetWidth; im.style.transition = '';
+  const sl = document.querySelector('.slot>span'); sl.style.animation = 'none'; void sl.offsetWidth; sl.style.animation = '';
+}
+function togglePlay() { playing = !playing; if (playing) schedule(); else clearTimeout(timer); }
+if (VIDEO) {
+  addEventListener('keydown', (e) => {
+    if (e.key === ' ') { e.preventDefault(); e.stopImmediatePropagation(); togglePlay(); }
+    else if (e.key === 'r' || e.key === 'R' || e.key === 'ㄱ') { restart(); schedule(); }
+  }, true);
+}
 let tx = null;
 addEventListener('touchstart', (e) => { tx = e.touches[0].clientX; }, { passive: true });
 addEventListener('touchend', (e) => { if (tx === null) return; const d = e.changedTouches[0].clientX - tx; tx = null; if (Math.abs(d) > 40) { go(cur + (d < 0 ? 1 : -1)); e.preventDefault(); } });
@@ -409,7 +533,9 @@ function aimZoom() {
   im.style.setProperty('--zt', `translate(${W / 2 - px}px, ${H / 2 - py}px) rotate(-14.1deg) scale(9)`);
 }
 addEventListener('resize', aimZoom);
+function toast(t) { const el = $('#toast'); el.textContent = '시연 화면: ' + t; el.classList.add('show'); clearTimeout(toast.h); toast.h = setTimeout(() => el.classList.remove('show'), 1400); }
 render(); aimZoom();
+if (VIDEO) schedule();
 </script>
 </body>
 </html>
